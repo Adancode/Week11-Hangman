@@ -13,7 +13,7 @@ game = {
 		this.resetGuessesRemaining();
 
 		//get a random word from the array
-		this.currentWrd = new Word(this.wordBank[Math.floor(Math.random()* this.wordBank.length)]);
+		this.currentWrd = new Word.Word(this.wordBank[Math.floor(Math.random()* this.wordBank.length)]);
 
 		this.currentWrd.getLets(); //populate currentWrd (made from Word constructor function) object with letters
 
@@ -36,7 +36,7 @@ game = {
 		    var findHowManyOfUserGuess = self.currentWrd.checkIfLetterFound(result.guessLetter);
 
 		    //if the user guessed incorrectly minus the number of guesses they have left
-		    if (findHowManyOfUserGuess == 0){
+		    if (findHowManyOfUserGuess === 0){
 		    	console.log('You guessed wrong!');
 		    	self.guessesRemaining--;
 		    }else{
@@ -53,10 +53,10 @@ game = {
 		    console.log(self.currentWrd.wordRender());
 		    console.log('here are the letters you guessed already: ');
 
-		    if ((self.guessesRemaining > 0) && (self.currentWrd.found == false)){
+		    if ((self.guessesRemaining > 0) && (self.currentWrd.found === false)){
 		    	self.keepPromptingUser();
 		    }
-		    else if(self.guessesRemaining == 0){
+		    else if(self.guessesRemaining === 0){
 		    	console.log('Game over bro it was ', self.currentWrd.word);
 		    	console.log('Get with the program man');
 		    }else{
