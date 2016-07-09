@@ -1,10 +1,13 @@
 var prompt = require('prompt');
 var Word = require('./word.js');
+var gameImport = require('./game.js');
+var lettersGuessed = '';
 
 prompt.start();
 
 game = {
-	wordBank : ["heart and soul", "relax", "burning up", "manic monday", "into the groove", "invisible touch", "rebel yell"],
+	//wordBank : ["heart and soul", "relax", "burning up", "manic monday", "into the groove", "invisible touch", "rebel yell"],
+     lettersGuessed: '',
 	wordsWon : 0,
 	guessesRemaining : 10, //per word
 	currentWrd : null, //the word object
@@ -13,7 +16,7 @@ game = {
 		this.resetGuessesRemaining();
 
 		//get a random word from the array
-		this.currentWrd = new Word.Word(this.wordBank[Math.floor(Math.random()* this.wordBank.length)]);
+		this.currentWrd = new Word.Word(gameImport.game.wordBank[Math.floor(Math.random()* gameImport.game.wordBank.length)]);
 
 		this.currentWrd.getLets(); //populate currentWrd (made from Word constructor function) object with letters
 
@@ -29,7 +32,7 @@ game = {
 		prompt.get(['guessLetter'], function(err, result) {
 		    // result is an object like this: { guessLetter: 'f' }
 		    //console.log(result);
-
+              lettersGuessed += result.guessLetter;
 		    console.log('  The letter or space you guessed is: ' + result.guessLetter);
 
 		    //this checks if the letter was found and if it is then it sets that specific letter in the word to be found
@@ -51,7 +54,7 @@ game = {
 
 		    console.log('Guesses remaining: ', self.guessesRemaining);
 		    console.log(self.currentWrd.wordRender());
-		    console.log('here are the letters you guessed already: ');
+		    console.log('here are the letters you guessed already: ' + lettersGuessed);
 
 		    if ((self.guessesRemaining > 0) && (self.currentWrd.found === false)){
 		    	self.keepPromptingUser();

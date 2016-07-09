@@ -10,6 +10,7 @@ var Word = function(wrd){
      this.found = false;
 	//make a property called getLets, set it to a function and inside the function loop over the word property and push letter objects into the lets property.
      this.getLets = function() {
+          //console.log("empty spaces " + this.emptySpaces(wrd));
           for (var i = 0; i < this.word.length; i++) {
                this.lets.push(new letter.Letter(this.word[i]));
           }
@@ -17,8 +18,23 @@ var Word = function(wrd){
 	//returns ture or false whether we found the current word or not
 	this.didWeFindTheWord = function() {
 		//set the found property to true or false based on whether all the letters have been found or not
-
+          var returnTrue = 0;
+          for (var i = 0; i < this.lets.length; i++) {
+               if (this.lets[i].appear === true) {
+                    returnTrue++;
+               }
+               else {
+                    return false;
+               }
+          }
+          if (returnTrue === this.lets.length) {
+               this.found = true; //return true;
+          }
+          else {
+               this.found = false; //return false;
+          }
 		//return the found property
+          return this.found;
 	};
 
 	this.checkIfLetterFound = function(guessLetter) {
