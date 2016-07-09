@@ -28,10 +28,10 @@ var Word = function(wrd){
                }
           }
           if (returnTrue === this.lets.length) {
-               this.found = true; //return true;
+               this.found = true;
           }
           else {
-               this.found = false; //return false;
+               this.found = false;
           }
 		//return the found property
           return this.found;
